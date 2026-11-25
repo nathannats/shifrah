@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support – Lions Net Uganda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #F5C842;
+            --gold-dark: #D6A82A;
+            --dark: #0A0C12;
+            --darker: #05070A;
+            --surface: #13172A;
+            --text: #E4E6EF;
+            --text-dim: #9CA3AF;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: var(--text);
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 5%;
+            background: rgba(5, 7, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(245, 200, 66, 0.2);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text);
+        }
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gold);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--darker);
+        }
+        .logo-text { font-weight: 800; font-size: 1.4rem; }
+        .logo-text span { color: var(--gold); }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--darker);
+            text-decoration: none;
+        }
+        .section {
+            padding: 7rem 5% 4rem;
+        }
+        .section-container { max-width: 1000px; margin: 0 auto; }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+        }
+        .faq-grid {
+            display: grid;
+            gap: 1rem;
+        }
+        .faq-item {
+            background: var(--surface);
+            border: 1px solid #252C42;
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .faq-item:hover { border-color: var(--gold); }
+        .faq-question {
+            font-weight: 700;
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 200px;
+            margin-top: 1rem;
+        }
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .contact-card {
+            background: var(--surface);
+            border: 1px solid #252C42;
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .contact-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+        .contact-card h3 { margin-bottom: 0.5rem; }
+        .contact-card a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+        .footer {
+            background: var(--surface);
+            padding: 2rem 5%;
+            text-align: center;
+            border-top: 1px solid #252C42;
+            color: var(--text-dim);
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="index.html" class="logo">
+        <div class="logo-icon">🦁</div>
+        <div class="logo-text">Lions<span>Net</span></div>
+    </a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="coverage.html">Coverage</a>
+        <a href="support.html" class="active">Support</a>
+    </div>
+    <a href="index.html#voucher" class="btn-primary">Get Connected</a>
+</nav>
+
+<section class="section">
+    <div class="section-container">
+        <h1 class="section-title">Frequently Asked Questions</h1>
+        <p class="section-subtitle">Find answers to common questions about our service</p>
+        
+        <div class="faq-grid">
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <div class="faq-question">
+                    How do I buy a voucher?
+                    <span>▼</span>
+                </div>
+                <div class="faq-answer">Send payment to 0702 233 444 via MTN MoMo (*165#) or Airtel Money (*185#). Include your phone number in the transaction. You'll receive your voucher code via SMS instantly.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <div class="faq-question">
+                    How long does my voucher last?
+                    <span>▼</span>
+                </div>
+                <div class="faq-answer">Daily passes last 24 hours, weekly passes last 7 days, and monthly passes last 30 days. The timer starts when you first activate your code.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <div class="faq-question">
+                    Can I use the same voucher on multiple devices?
+                    <span>▼</span>
+                </div>
+                <div class="faq-answer">Monthly passes support up to 3 devices simultaneously. Daily and weekly passes are for single device use.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <div class="faq-question">
+                    What happens after my voucher expires?
+                    <span>▼</span>
+                </div>
+                <div class="faq-answer">You'll be disconnected from the network. Simply purchase a new voucher and activate it to continue browsing.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <div class="faq-question">
+                    Is there a data limit?
+                    <span>▼</span>
+                </div>
+                <div class="faq-answer">No! All our plans are truly unlimited. No data caps, no throttling, just fast internet for your entire session.</div>
+            </div>
+            <div class="faq-item" onclick="this.classList.toggle('open')">
+                <div class="faq-question">
+                    What areas do you cover?
+                    <span>▼</span>
+                </div>
+                <div class="faq-answer">We currently cover Kampala City Center, Wandegeya, Nakasero, Ntinda, Makerere University, Najjera, and Bweyogerere. We're expanding to more areas every month!</div>
+            </div>
+        </div>
+        
+        <div class="contact-info">
+            <div class="contact-card">
+                <div class="icon">📞</div>
+                <h3>Call Us</h3>
+                <a href="tel:0702233444">0702 233 444</a>
+            </div>
+            <div class="contact-card">
+                <div class="icon">💬</div>
+                <h3>WhatsApp</h3>
+                <a href="https://wa.me/256702233444">Chat with us</a>
+            </div>
+            <div class="contact-card">
+                <div class="icon">✉️</div>
+                <h3>Email</h3>
+                <a href="mailto:support@lionsnet.ug">support@lionsnet.ug</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <p>&copy; 2025 Lions Net Uganda. We're here to help 24/7.</p>
+</footer>
+
+<script>
+    // Auto-open first FAQ for better UX
+    setTimeout(() => {
+        const firstFaq = document.querySelector('.faq-item');
+        if (firstFaq) firstFaq.classList.add('open');
+    }, 500);
+</script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coverage Map – Lions Net Uganda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #F5C842;
+            --gold-dark: #D6A82A;
+            --dark: #0A0C12;
+            --darker: #05070A;
+            --surface: #13172A;
+            --text: #E4E6EF;
+            --text-dim: #9CA3AF;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: var(--text);
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 5%;
+            background: rgba(5, 7, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(245, 200, 66, 0.2);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text);
+        }
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gold);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--darker);
+        }
+        .logo-text { font-weight: 800; font-size: 1.4rem; }
+        .logo-text span { color: var(--gold); }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--darker);
+            text-decoration: none;
+        }
+        .section {
+            padding: 7rem 5% 4rem;
+        }
+        .section-container { max-width: 1200px; margin: 0 auto; }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+        }
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 24px;
+            margin-bottom: 2rem;
+            border: 1px solid #252C42;
+        }
+        .hotspots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .hotspot-card {
+            background: var(--surface);
+            border: 1px solid #252C42;
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+        .hotspot-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-4px);
+        }
+        .hotspot-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+        .hotspot-address {
+            color: var(--text-dim);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        .hotspot-status {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(34, 212, 122, 0.2);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #22D47A;
+        }
+        .footer {
+            background: var(--surface);
+            padding: 2rem 5%;
+            text-align: center;
+            border-top: 1px solid #252C42;
+            color: var(--text-dim);
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="index.html" class="logo">
+        <div class="logo-icon">🦁</div>
+        <div class="logo-text">Lions<span>Net</span></div>
+    </a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="coverage.html" class="active">Coverage</a>
+        <a href="support.html">Support</a>
+    </div>
+    <a href="index.html#voucher" class="btn-primary">Get Connected</a>
+</nav>
+
+<section class="section">
+    <div class="section-container">
+        <h1 class="section-title">Our Coverage Map</h1>
+        <p class="section-subtitle">Find the nearest Lions Net hotspot near you</p>
+        
+        <div id="map"></div>
+        
+        <h2 style="margin: 2rem 0 1rem;">Active Hotspot Locations</h2>
+        <div class="hotspots-grid" id="hotspotsList">
+            <!-- Dynamic hotspots will load here -->
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <p>&copy; 2025 Lions Net Uganda. Expanding coverage across Kampala.</p>
+</footer>
+
+<script>
+    let map;
+    
+    const hotspots = [
+        { name: "Kampala City Center", lat: 0.3136, lng: 32.5811, address: "Plot 12, Kampala Road", status: "Active", devices: 342 },
+        { name: "Wandegeya Branch", lat: 0.3356, lng: 32.5755, address: "Makerere Mall, Wandegeya", status: "Active", devices: 187 },
+        { name: "Nakasero Office", lat: 0.2864, lng: 32.5826, address: "Nakasero Business Center", status: "Active", devices: 94 },
+        { name: "Ntinda Shopping Center", lat: 0.3224, lng: 32.6071, address: "Ntinda Complex", status: "Active", devices: 156 },
+        { name: "Makerere University", lat: 0.3512, lng: 32.5867, address: "Main Campus, Makerere", status: "Active", devices: 423 },
+        { name: "Muyenga", lat: 0.2978, lng: 32.6094, address: "Muyenga Mall", status: "Coming Soon", devices: 0 },
+        { name: "Najjera", lat: 0.3575, lng: 32.6169, address: "Najjera Shopping Center", status: "Active", devices: 89 },
+        { name: "Bweyogerere", lat: 0.3492, lng: 32.6483, address: "Bweyogerere Stage", status: "Active", devices: 112 }
+    ];
+    
+    function initMap() {
+        const kampala = { lat: 0.3136, lng: 32.5811 };
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 12,
+            center: kampala,
+            styles: [
+                { featureType: 'all', elementType: 'all', stylers: [{ saturation: -100 }, { lightness: -20 }] }
+            ]
+        });
+        
+        // Add markers for all hotspots
+        hotspots.forEach(hotspot => {
+            if (hotspot.status === 'Active') {
+                const marker = new google.maps.Marker({
+                    position: { lat: hotspot.lat, lng: hotspot.lng },
+                    map: map,
+                    title: hotspot.name,
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+                });
+                
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `<div style="color:#000;"><strong>${hotspot.name}</strong><br>${hotspot.address}<br>👥 ${hotspot.devices} active users</div>`
+                });
+                
+                marker.addListener('click', () => {
+                    infoWindow.open(map, marker);
+                });
+            }
+        });
+        
+        // Display hotspots list
+        const hotspotsList = document.getElementById('hotspotsList');
+        hotspotsList.innerHTML = hotspots.map(hotspot => `
+            <div class="hotspot-card">
+                <div class="hotspot-name">📍 ${hotspot.name}</div>
+                <div class="hotspot-address">${hotspot.address}</div>
+                <span class="hotspot-status">${hotspot.status}</span>
+                ${hotspot.devices > 0 ? `<div style="margin-top: 0.5rem; color: var(--text-dim);">👥 ${hotspot.devices} active users</div>` : ''}
+            </div>
+        `).join('');
+    }
+    
+    // Fallback in case Google Maps doesn't load
+    window.initMap = initMap;
+    setTimeout(() => {
+        if (!window.google) {
+            document.getElementById('map').innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;background:#13172A;border-radius:24px;">⚠️ Google Maps failed to load. Please check your API key.</div>';
+        }
+    }, 5000);
+</script>
+</body>
+</html>

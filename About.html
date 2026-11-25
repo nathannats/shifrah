@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us – Lions Net Uganda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --gold: #F5C842;
+            --gold-dark: #D6A82A;
+            --dark: #0A0C12;
+            --darker: #05070A;
+            --surface: #13172A;
+            --text: #E4E6EF;
+            --text-dim: #9CA3AF;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker);
+            color: var(--text);
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 5%;
+            background: rgba(5, 7, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(245, 200, 66, 0.2);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text);
+        }
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gold);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--darker);
+        }
+        .logo-text { font-weight: 800; font-size: 1.4rem; }
+        .logo-text span { color: var(--gold); }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border: none;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--darker);
+            text-decoration: none;
+        }
+        .section {
+            padding: 7rem 5% 4rem;
+        }
+        .section-container { max-width: 1000px; margin: 0 auto; }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+        .about-content {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid #252C42;
+            line-height: 1.8;
+            color: var(--text-dim);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .stat-box {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--surface);
+            border-radius: 20px;
+            border: 1px solid #252C42;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+        .footer {
+            background: var(--surface);
+            padding: 2rem 5%;
+            text-align: center;
+            border-top: 1px solid #252C42;
+            color: var(--text-dim);
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="index.html" class="logo">
+        <div class="logo-icon">🦁</div>
+        <div class="logo-text">Lions<span>Net</span></div>
+    </a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="coverage.html">Coverage</a>
+        <a href="support.html">Support</a>
+    </div>
+    <a href="index.html#voucher" class="btn-primary">Get Connected</a>
+</nav>
+
+<section class="section">
+    <div class="section-container">
+        <h1 class="section-title">About Lions Net Uganda</h1>
+        <div class="about-content">
+            <p style="margin-bottom: 1rem;">Lions Net Uganda was founded with a simple mission: to provide fast, reliable, and affordable internet access to everyone in Uganda. We believe that connectivity is a necessity, not a luxury.</p>
+            
+            <p style="margin-bottom: 1rem;">Starting in Kampala, we've expanded our network to cover major business districts, educational institutions, and residential areas. Our hotspot technology ensures seamless connectivity whether you're working remotely, streaming entertainment, or staying connected with loved ones.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-number">50+</div>
+                    <div>Hotspots</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">10,000+</div>
+                    <div>Happy Customers</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">99.9%</div>
+                    <div>Uptime</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">24/7</div>
+                    <div>Support</div>
+                </div>
+            </div>
+            
+            <p><strong>Our commitment to you:</strong> No hidden fees, no contracts, and no throttling. Just fast internet that works when you need it.</p>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <p>&copy; 2025 Lions Net Uganda. Connecting Uganda, one hotspot at a time.</p>
+</footer>
+</body>
+</html>
